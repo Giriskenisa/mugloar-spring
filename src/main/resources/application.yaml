@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: solution
+
+dragons:
+  api.base-url: https://dragonsofmugloar.com/api/v2
