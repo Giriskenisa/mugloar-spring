@@ -1,13 +1,16 @@
 package com.isa.solution.service;
 
 import com.isa.solution.apiclient.DragonsApiClient;
-import com.isa.solution.exception.DragonsApiException;
 import com.isa.solution.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 
 @Service
 public class GamePlayService {
@@ -74,7 +77,6 @@ public class GamePlayService {
 
                 if (selectedMission.isEmpty()) {
                     attemptedInThisTurn.clear();
-                    sleepSafely(200);
                     continue;
                 }
 
@@ -89,7 +91,6 @@ public class GamePlayService {
 
                     game = new Game(gameId, resp.lives(), resp.gold(), game.level(), resp.score(), resp.turn(), resp.highScore());
                     attemptedInThisTurn.clear();
-                    sleepSafely(50);
 
                 } catch (Exception e) {
                     log.warn("[{}] Solve failed: {}", gameId, e.getMessage());
@@ -119,13 +120,5 @@ public class GamePlayService {
         boolean success = result.success();
         int score = result.finalScore();
         return new GamePlayResponse(1, success ? 1 : 0, success ? 0 : 1, score, score, score, List.of(result));
-    }
-
-    private void sleepSafely(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
     }
 }
