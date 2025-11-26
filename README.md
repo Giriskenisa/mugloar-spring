@@ -21,7 +21,7 @@ This project is a client for the Dragons of Mugloar game. It provides a simple w
 
 2.  **Play the game:**
 
-    Once the application is running, you can play the game by sending a POST request to the `/api/v2/game/play` endpoint.
+    Once the application is running, you can play the game by sending a POST request to the `/api/game/play` endpoint.
 
     ```bash
     curl -X POST http://localhost:8080/api/game/play
